@@ -1,0 +1,10 @@
+go 1.25.4
+
+//The use directive tells Go that the module in the hello directory should be main modules when doing a build.
+//go.work can be used instead of adding replace directives to work across multiple modules.
+
+use (
+	./example/hello
+	./hello
+	./web-service-gin
+)
