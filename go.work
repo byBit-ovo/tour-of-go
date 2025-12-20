@@ -5,6 +5,8 @@ go 1.25.4
 
 use (
 	./example/hello
+	./fuzz
+	./generics
 	./hello
 	./web-service-gin
 )
