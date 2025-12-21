@@ -106,11 +106,48 @@ func renderTemplate(w http.ResponseWriter, p *Page,tmpl string) {
 //     }
 // }
 
-func viewHandler(w http.ResponseWriter, r *http.Request) {
-   	title, err := getTitle(w, r)
-	if err != nil {
-        return
-    }
+// version_1 with duplicate validation of error
+// func viewHandler(w http.ResponseWriter, r *http.Request) {
+//    	title, err := getTitle(w, r)
+// 	if err != nil {
+//         return
+//     }
+//     p, err := loadPage(title)
+// 	if err != nil {
+// 		http.Redirect(w, r, "/edit/"+title, http.StatusFound)
+// 		return 
+//     }
+// 	renderTemplate(w, p, "view")
+// }
+
+// func editHandler(w http.ResponseWriter, r *http.Request) {
+//    	title, err := getTitle(w, r)
+//     if err != nil {
+//         return
+//     }
+//     p, err := loadPage(title)
+//     if err != nil {
+// 		p = &Page{Title: title}
+//     }
+// 	renderTemplate(w, p, "edit")
+// }
+
+// func saveHandler(w http.ResponseWriter, r *http.Request) {
+//    	title, err := getTitle(w, r)
+//     if err != nil {
+//         return
+//     }
+//     body := r.FormValue("body")
+//     p := &Page{Title: title, Body: []byte(body)}
+//     err = p.save()
+// 	if err != nil {
+//         http.Error(w, err.Error(), http.StatusInternalServerError)
+//         return
+//     }
+//     http.Redirect(w, r, "/view/"+title, http.StatusFound)
+// }
+
+func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
     p, err := loadPage(title)
 	if err != nil {
 		http.Redirect(w, r, "/edit/"+title, http.StatusFound)
@@ -119,11 +156,7 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, p, "view")
 }
 
-func editHandler(w http.ResponseWriter, r *http.Request) {
-   	title, err := getTitle(w, r)
-    if err != nil {
-        return
-    }
+func editHandler(w http.ResponseWriter, r *http.Request,title string) {
     p, err := loadPage(title)
     if err != nil {
 		p = &Page{Title: title}
@@ -131,21 +164,19 @@ func editHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, p, "edit")
 }
 
-func saveHandler(w http.ResponseWriter, r *http.Request) {
-   	title, err := getTitle(w, r)
-    if err != nil {
-        return
-    }
+func saveHandler(w http.ResponseWriter, r *http.Request, title string) {
     body := r.FormValue("body")
     p := &Page{Title: title, Body: []byte(body)}
-    err = p.save()
+    err := p.save()
 	if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
     }
     http.Redirect(w, r, "/view/"+title, http.StatusFound)
 }
+func makeHandler(w http.ResponseWriter, r *http.Request, title string){
 
+}
 func main() {
 	http.HandleFunc("/view/",viewHandler)
 	http.HandleFunc("/edit/",editHandler)
