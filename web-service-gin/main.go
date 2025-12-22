@@ -133,7 +133,7 @@ func renderTemplate(w http.ResponseWriter, p *Page,tmpl string) {
 // }
 
 // func saveHandler(w http.ResponseWriter, r *http.Request) {
-//    	title, err := getTitle(w, r)
+//     title, err := getTitle(w, r)
 //     if err != nil {
 //         return
 //     }
@@ -174,13 +174,21 @@ func saveHandler(w http.ResponseWriter, r *http.Request, title string) {
     }
     http.Redirect(w, r, "/view/"+title, http.StatusFound)
 }
-func makeHandler(w http.ResponseWriter, r *http.Request, title string){
-
+// validation of title is duplicated, so use this func 
+func makeHandler(fn func(http.ResponseWriter,  *http.Request, string)) http.HandlerFunc{
+	return func(w http.ResponseWriter, r *http.Request){
+		m := validPath.FindStringSubmatch(r.URL.Path)
+		if m == nil {
+			http.NotFound(w, r)
+			return
+    	}
+		fn(w, r, m[2])
+	}
 }
 func main() {
-	http.HandleFunc("/view/",viewHandler)
-	http.HandleFunc("/edit/",editHandler)
-	http.HandleFunc("/save/",saveHandler)
+	http.HandleFunc("/view/",makeHandler(viewHandler))
+	http.HandleFunc("/edit/",makeHandler(editHandler))
+	http.HandleFunc("/save/",makeHandler(saveHandler))
 	log.Fatal(http.ListenAndServe(":8080", nil))
 
 	// p1 := &Page{Title: "TestPage", Body:[]byte("This is a test page!")}
