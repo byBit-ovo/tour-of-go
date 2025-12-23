@@ -5,7 +5,7 @@ import (
 	"rsc.io/quote"
 	"example/greetings"
 	"log"
-	"golang.org/x/example/hello/reverse"
+	_ "golang.org/x/example/hello/reverse"
 )
 func practice_16(){
 	log.SetPrefix("greetings: ")
@@ -33,7 +33,26 @@ func practice_16(){
 		fmt.Println(greetingOferr)
 	}
 }
+
+const (
+	a = iota
+	b = iota
+	c = iota
+)
+const (
+	e = iota
+	f
+)
+const (
+	BIG = 1 << 50
+	SMALL = BIG >> 49
+)
+
 func main(){
-	fmt.Println(reverse.String("Hello!"))
-	fmt.Println(reverse.Int(349))
+	// fmt.Println(reverse.String("Hello!"))
+	// fmt.Println(reverse.Int(349))
+	fmt.Println(BIG, SMALL)
+	if n := 1; n > 0{
+		fmt.Println("Big")
+	}
 }
