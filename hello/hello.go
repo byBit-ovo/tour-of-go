@@ -47,12 +47,23 @@ const (
 	BIG = 1 << 50
 	SMALL = BIG >> 49
 )
+type Car struct{
+	price float32
+	weight float32
+}
 
+func (car *Car) setCarPrice(p float32){
+	car.price = p
+}
 func main(){
 	// fmt.Println(reverse.String("Hello!"))
 	// fmt.Println(reverse.Int(349))
-	fmt.Println(BIG, SMALL)
-	if n := 1; n > 0{
-		fmt.Println("Big")
-	}
+	// fmt.Println(BIG, SMALL)
+	// if n := 1; n > 0{
+	// 	fmt.Println("Big")
+	// }
+	car := Car{1.2, 9.2}
+	fmt.Println(car.price)
+	car.setCarPrice(9.9)
+	fmt.Println(car.price)
 }
