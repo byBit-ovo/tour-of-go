@@ -10,7 +10,12 @@ d = defaultdict(int)
 # tu = (1,2,3)
 # print(tu)
 
-s = [1, 2, 3, 4,5]
+# s = [1, 2, 3, 4,5]
 
-w = [n if n%2==1 else n*n for n in s]
-print(w)
+# w = [n if n%2==1 else n*n for n in s]
+# print(w)
+
+# t = {'py'}
+# print(t)
+a = 1
+b = a + 1

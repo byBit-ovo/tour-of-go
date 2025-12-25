@@ -62,7 +62,7 @@ func main(){
 	// if n := 1; n > 0{
 	// 	fmt.Println("Big")
 	// }
-	car := Car{1.2, 9.2}
+	car := &Car{1.2, 9.2}
 	fmt.Println(car.price)
 	car.setCarPrice(9.9)
 	fmt.Println(car.price)
