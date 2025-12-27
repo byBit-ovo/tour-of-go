@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	_ "errors"
 	"rsc.io/quote"
 	"example/greetings"
 	"log"
@@ -55,15 +56,53 @@ type Car struct{
 func (car *Car) setCarPrice(p float32){
 	car.price = p
 }
+
+type greet interface{
+	hello() string
+}
+type Chinese struct{
+
+}
+type American struct{
+
+}
+func (ch *Chinese) hello() string{
+	return "你好"
+}
+func (am *American) hello() string{
+	return "Hello"
+}
+
+func modify(s *string){
+	*s = "j"
+}
 func main(){
-	// fmt.Println(reverse.String("Hello!"))
-	// fmt.Println(reverse.Int(349))
-	// fmt.Println(BIG, SMALL)
-	// if n := 1; n > 0{
-	// 	fmt.Println("Big")
+	var s string = "hello"
+	modify(&s)
+	fmt.Print(s)
+	// b := []byte{}
+	// for i:=0;i<500;i++{
+	// 	b = append(b, byte(i))
+	// 	fmt.Printf("%c\n", b[i])
 	// }
-	car := &Car{1.2, 9.2}
-	fmt.Println(car.price)
-	car.setCarPrice(9.9)
-	fmt.Println(car.price)
+	// var p greet
+	// p = &Chinese{}
+	// fmt.Println(p.hello())
+	// p = &American{}
+	// fmt.Println(p.hello())	
+	// s,ok := p.(*Chinese)
+	// if ok{
+	// 	fmt.Println(s.hello())
+	// }
+	// w := [4]byte{1,2,3,4}
+	// for _, c := range w{
+	// 	fmt.Println(string(c))
+	// }
+	// str := "hello"
+	// fmt.Print(str[1:3])
+	// str += "hel"
+	// for _, c := range str{
+	// 	fmt.Print()
+	// }
+	// errors.New("he")
 }

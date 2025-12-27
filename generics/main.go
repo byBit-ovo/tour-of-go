@@ -32,7 +32,19 @@ func SumIntsOrFloats[K comparable, V Number](m map[K]V) V {
     return s
 }
 
+
+type Vector[T any] struct{
+	start *T
+	size int32
+	capacity int32
+}
+func Add[T int64 | float64 | int] (a, b T) T{
+	return a + b
+}
+
 func main() {
+	fmt.Println(Add(1,2))
+	fmt.Println(Add(1.1,2.2))
     // Initialize a map for the integer values
     ints := map[string]int64{
         "first":  34,
