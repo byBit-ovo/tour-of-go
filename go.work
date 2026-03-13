@@ -4,6 +4,7 @@ go 1.25.4
 //go.work can be used instead of adding replace directives to work across multiple modules.
 
 use (
+	./List
 	./example/hello
 	./fuzz
 	./generics
